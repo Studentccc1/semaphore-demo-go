@@ -26,7 +26,7 @@ blocks:
             - '          - make lint'
             - '      - name:  Tests'
             - '        execution_time_limit:'
-            - '          minutes: 30'
+            - '          minutes: 30000'
             - '        commands:'
             - '          - checkout'
             - '          - make test'
